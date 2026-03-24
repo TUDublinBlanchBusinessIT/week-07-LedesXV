@@ -27,6 +27,7 @@
                 <a class="nav-link" href={{ route('members.index')}}>Members List</a>
               </li>
             </ul>
+              @include('layouts.navAuth')
           </div>
         </nav>
         
