@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatememberRequest;
 use App\Repositories\memberRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Flash;
 use Response;
 
@@ -152,5 +153,20 @@ class memberController extends AppBaseController
         Flash::success('Member deleted successfully.');
 
         return redirect(route('members.index'));
+    }
+
+    public function getLoggedInMemberDetails()
+    {
+        if (!Auth::guest()){
+        $user = Auth::user();
+        echo "Userid is " . $user->id;
+        echo "Member id is " . $user->member->id;
+        echo "The member's name is " . $user->member->firstname . " ";
+        echo $user->member->surname;
+        echo "The member is a " . $user->member->membertype;
+        }
+        else {
+        echo "not logged in ";
+        }
     }
 }
