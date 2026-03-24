@@ -23,7 +23,7 @@ class member extends Model
 
     use HasFactory;
 
-    public $table = 'member';
+    public $table = 'members';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
