@@ -40,3 +40,13 @@ Route::resource('roles', App\Http\Controllers\rolesController::class);
 
 Route::get('/users/assignroles/{id}','App\Http\Controllers\UserController@assignRoles')->name('users.assignroles');
 Route::patch('/users/updateroles/{id}','App\Http\Controllers\UserController@updateRoles')->name("roles.rolesupdate");
+
+Route::resource('permissions', App\Http\Controllers\permissionsController::class);
+
+Route::get('/roles/assignpermissions/{id}',
+    'App\Http\Controllers\RolesController@assignPermissions')
+    ->name('roles.assignpermissions');
+
+Route::patch('/roles/updatepermissions/{id}',
+    'App\Http\Controllers\RolesController@updatePermissions')
+    ->name('roles.permissionsupdate');
