@@ -15,6 +15,8 @@
                     <a href="{!! route('roles.show', [$roles->id]) !!}" class='btn btn-default btn-xs'><i class="far fa-eye"></i></i></a>
                     <a href="{!! route('roles.edit', [$roles->id]) !!}" class='btn btn-default btn-xs'><i class="far fa-edit"></i></i></a>
                     {!! Form::button('<i class="far fa-trash-alt"></i></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <a href="{{ route('roles.assignpermissions', [$roles->id]) }}"class='btn btn-default btn-xs'><i class="fas fa-unlock-alt"></i>
+</a>
                 </div>
                 {!! Form::close() !!}
             </td>
