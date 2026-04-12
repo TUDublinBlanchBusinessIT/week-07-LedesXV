@@ -5,48 +5,66 @@
         <title>{{ config('app.name') }}</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-        <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
               integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Bootstrap 5 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
-        <!-- Bootstrap 5 Navbar -->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-          <div class="container-fluid">
-            <ul class="navbar-nav">
-              <li class="nav-item"> 
-                <a class="nav-link" href={{ route('bookings.create')}}>New Booking</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={{ route('members.index')}}>Members List</a>
-              </li>
-            </ul>
-              @include('layouts.navAuth')
-          </div>
-        </nav>
-        
-        <div id="page-content-wrapper"> 
-            <div class="container-fluid"> 
-                <div class="row">
-                    <!-- Well for left side of the page (to compensate for widescreen) -->
-                    <div class="col-lg-2"></div>
-                    <!-- Slot for content from Lower Level views with sections called 'content' pulled in here -->
-                    <div class="col-lg-8"> @yield('content') </div>
-                    <!-- Well for right side of the page (to compensate for widescreen) -->
-                    <div class="col-lg-2"></div> 
-                </div> 
-            </div> 
-        </div> 
+            <div class="container-fluid">
 
-        <!-- Webpack mix npm generated -->
-        <link rel="stylesheet" href="{{asset('css/app.css')}}"> 
-        <script src="{{asset('js/app.js')}}"></script>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('bookings.create') }}">New Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('members.index') }}">Members List</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto" style="margin-right:10px">
+                    @if(Auth::check())
+
+                        @if(Auth::user()->hasRole('System Admin'))
+                            @include('layouts.adminmenu')
+                        @endif
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        </li>
+
+                    @else
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+
+                    @endif
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">@yield('content')</div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         @stack('js_scripts')
     </body>
 </html>

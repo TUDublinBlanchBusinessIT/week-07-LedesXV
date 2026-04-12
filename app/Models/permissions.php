@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -18,7 +17,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class permissions extends Model
 {
-    use SoftDeletes;
 
     use HasFactory;
 
@@ -28,7 +26,6 @@ class permissions extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
 
 
 
